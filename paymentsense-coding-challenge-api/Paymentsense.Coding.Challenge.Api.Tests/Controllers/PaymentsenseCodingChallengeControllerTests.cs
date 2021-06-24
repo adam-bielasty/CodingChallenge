@@ -11,7 +11,7 @@ namespace Paymentsense.Coding.Challenge.Api.Tests.Controllers
         [Fact]
         public void Get_OnInvoke_ReturnsExpectedMessage()
         {
-            var controller = new PaymentsenseCodingChallengeController();
+            var controller = new PaymentsenseCodingChallengeController(null);
 
             var result = controller.Get().Result as OkObjectResult;
 
