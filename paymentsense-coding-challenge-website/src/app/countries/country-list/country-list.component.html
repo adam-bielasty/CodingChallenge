@@ -1,0 +1,5 @@
+<div class="country-list" >
+    <app-country *ngFor="let country of countries" [country]="country"></app-country>
+</div>
+
+<app-paginator [metaData]="metaData" (changePage)="changePage($event)"></app-paginator>

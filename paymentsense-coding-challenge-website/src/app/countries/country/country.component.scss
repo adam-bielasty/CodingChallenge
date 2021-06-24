@@ -1,0 +1,27 @@
+.country {
+
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    width: 400px;
+
+    transform: scale(1);
+    transition: ease-in-out 0.2s;
+
+    .flag {
+        max-height: 30px;
+        position: absolute;
+    }
+
+    span {
+        padding-left: 80px
+    }
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+        transition: ease-in-out 0.5s;
+        background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
+    }
+}

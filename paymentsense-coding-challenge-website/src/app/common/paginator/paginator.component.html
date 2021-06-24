@@ -1,0 +1,17 @@
+<ul *ngIf="metaData && metaData.pageCount" class="pagination">
+    <li [ngClass]="{disabled:!metaData.hasPreviousPage}" class="page-item first-item">
+        <a (click)="setPage(1)" class="page-link">First</a>
+    </li>
+    <li [ngClass]="{disabled:!metaData.hasPreviousPage}" class="page-item previous-item">
+        <a (click)="setPage(metaData.pageNumber - 1)" class="page-link">Previous</a>
+    </li>
+    <li *ngFor="let page of pages" [ngClass]="{active:metaData.pageNumber === page}" class="page-item number-item">
+        <a (click)="setPage(page)" class="page-link">{{page}}</a>
+    </li>
+    <li [ngClass]="{disabled:!metaData.hasNextPage}" class="page-item next-item">
+        <a (click)="setPage(metaData.pageNumber + 1)" class="page-link">Next</a>
+    </li>
+    <li [ngClass]="{disabled:!metaData.hasNextPage}" class="page-item last-item">
+        <a (click)="setPage(metaData.pageCount)" class="page-link">Last</a>
+    </li>
+</ul>
