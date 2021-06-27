@@ -21,7 +21,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.metaData && this.metaData.pageCount) {
       this.pages = this.range(1, this.metaData.pageCount + 1, 1)
-        .filter(x => (x >= this.metaData.pageNumber-3 && x <= this.metaData.pageNumber + 3));
+        .filter(x => (x >= this.metaData.pageNumber - 2 && x <= this.metaData.pageNumber + 2));
     }
   }
 

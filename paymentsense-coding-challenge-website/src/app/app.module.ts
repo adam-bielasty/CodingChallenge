@@ -10,13 +10,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CountryListComponent } from './countries/country-list/country-list.component';
 import { CountryComponent } from './countries/country/country.component';
 import { PaginatorComponent } from './common/paginator/paginator.component';
+import { HeaderComponent } from './header/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CountryListComponent,
     CountryComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

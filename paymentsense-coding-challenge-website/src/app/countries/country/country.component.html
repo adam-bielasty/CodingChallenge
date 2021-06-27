@@ -1,4 +1,12 @@
 <div class="country">
-    <img class="flag" src="{{country.flag}}"/>
-    <span>{{country.name}}</span> 
+    <img class="flag" src="{{country.flag}}" (click)="toggleDetails(country)"/>
+    <span (click)="toggleDetails(country)">{{country.name}}</span> 
+    <div class="details" *ngIf="showDetails">
+        <div><strong>Capital: </strong>{{country.capital}}</div>
+        <div><strong>Population: </strong>{{country.population}}</div>
+        <div><strong>Languages: </strong>{{displayLanguageNames}}</div>
+        <div><strong>Currencies: </strong>{{displayCurrencyNames}}</div>
+        <div><strong>Borders: </strong>{{displayBorderNames}}</div>
+        <div><strong>Time Zones: </strong>{{country.timeZones.join(', ')}}</div>
+    </div>
 </div>

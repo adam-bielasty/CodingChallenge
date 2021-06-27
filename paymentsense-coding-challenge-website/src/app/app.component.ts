@@ -11,7 +11,6 @@ import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
 export class AppComponent {
   public faThumbsUp = faThumbsUp;
   public faThumbsDown = faThumbsDown;
-  public title = 'Paymentsense Coding Challenge!';
   public paymentsenseCodingChallengeApiIsActive = false;
   public paymentsenseCodingChallengeApiActiveIcon = this.faThumbsDown;
   public paymentsenseCodingChallengeApiActiveIconColour = 'red';

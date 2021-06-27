@@ -11,6 +11,7 @@ export class Country {
     languages: Language[];
     capital: string;
     borders: string[];
+    countryBorders: string[];
 }
 
 

@@ -1,27 +1,52 @@
-.country {
+@import "../../../scss/variables.scss";
 
+.country {
     text-align: left;
     display: flex;
     align-items: center;
     padding: 8px;
-    width: 400px;
+    max-width: 400px;
 
     transform: scale(1);
     transition: ease-in-out 0.2s;
 
     .flag {
+        cursor: pointer;
         max-height: 30px;
         position: absolute;
     }
 
-    span {
-        padding-left: 80px
+    >span {
+        cursor: pointer;
+        padding-left: 80px;
+        width: 200px;
+    }
+
+    .details {
+        font-size: 12px;
+        width: 200px;
+        margin-left: 30px;
     }
 
     &:hover {
-        cursor: pointer;
         transform: scale(1.2);
         transition: ease-in-out 0.5s;
         background-image: linear-gradient(to right, #ffe359 0%, #fff2ac 100%);
+    }
+}
+
+@media (max-width: $xs-size) { 
+    .country {
+        display: flow-root;
+
+        .details {
+            margin-left: 0;
+            margin-top: 12px;
+            width: 100%;
+        }
+
+        &:hover {
+            transform: scale(1.0);
+        }
     }
 }

@@ -1,7 +1,15 @@
+@import "../../../scss/variables.scss";
+
 .country-list {
     margin-bottom: 16px;
 }
 
 app-country {
     padding: 2px;
+}
+
+@media (max-width: $xs-size) { 
+    .country-list {
+        padding: 10px;
+    }
 }

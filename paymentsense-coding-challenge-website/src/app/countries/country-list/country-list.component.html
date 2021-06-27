@@ -1,5 +1,12 @@
-<div class="country-list" >
-    <app-country *ngFor="let country of countries" [country]="country"></app-country>
-</div>
+<div *ngIf="countries && countries.length > 0">
+    <app-paginator [metaData]="metaData" (changePage)="changePage($event)"></app-paginator>
 
-<app-paginator [metaData]="metaData" (changePage)="changePage($event)"></app-paginator>
+    <div class="country-list">
+        <app-country *ngFor="let country of countries" [country]="country"></app-country>
+    </div>
+
+    <app-paginator [metaData]="metaData" (changePage)="changePage($event)"></app-paginator>
+</div>
+<div *ngIf="!countries || countries.length == 0">
+    <p>There is no results.</p>
+</div>

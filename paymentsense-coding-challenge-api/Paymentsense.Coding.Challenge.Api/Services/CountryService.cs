@@ -33,7 +33,9 @@ namespace Paymentsense.Coding.Challenge.Api.Services
                 entry.SlidingExpiration = TimeSpan.FromMinutes(Consts.DefaultCacheTimespanInSeconds);
 
                 var response = await _httpClient.GetAsync("/rest/v2/all?fields=name;flag;population;timezones;languages;currencies;capital;borders;alpha3Code");
-                return await HandleResponse<IEnumerable<Country>>(response);
+                var countries =  (await HandleResponse<IEnumerable<Country>>(response)).ToList();
+                countries.ForEach(c => c.CountryBorders = c.Borders.Select(b => countries.First(c => c.Alpha3Code.Equals(b, StringComparison.InvariantCultureIgnoreCase)).Name));
+                return countries;
             });
         }
 

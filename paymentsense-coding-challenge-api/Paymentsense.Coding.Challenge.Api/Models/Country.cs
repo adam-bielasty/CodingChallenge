@@ -15,5 +15,7 @@ namespace Paymentsense.Coding.Challenge.Api.Models
         public IEnumerable<Language> Languages { get; set; }
         public string Capital { get; set; }
         public IEnumerable<string> Borders { get; set; }
+        public IEnumerable<string> CountryBorders { get; set; }
     }
+
 }
