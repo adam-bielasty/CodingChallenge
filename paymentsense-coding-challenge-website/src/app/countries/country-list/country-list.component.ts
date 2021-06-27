@@ -24,12 +24,12 @@ export class CountryListComponent implements OnInit {
 
   async ngOnInit() {
     this.route.queryParams
-    .subscribe(async params => {
-      this.page = +params['page'];
-      this.searchText = params['searchText'] || "";
+      .subscribe(async params => {
+        this.page = +(params['page'] || 1);
+        this.searchText = params['searchText'] || "";
 
-      await this.refreshPage(this.page, this.searchText);
-    });
+        await this.refreshPage(this.page, this.searchText);
+      });
   }
 
   async changePage(page: number) {

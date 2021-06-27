@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { faSearch, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faThumbsUp, faThumbsDown, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { NgModule} from '@angular/core'
 import { NgForm } from '@angular/forms';
 import { PaymentsenseCodingChallengeApiService } from 'src/app/services';
@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   faSearch = faSearch;
+  faTimesCircle = faTimesCircle;
   searchText: string;
   
   faThumbsUp = faThumbsUp;
@@ -55,4 +56,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate( ['.'],  { queryParams: { page: 1, searchText: this.searchText } })
   }
 
+  clearFilter() {
+    
+    this.router.navigate( ['.'],  { queryParams: { page: 1, searchText: "" } })
+  }
 }

@@ -8,7 +8,7 @@
         <button class="btn btn-primary">Add Country</button>
         
         
-        <a class="btn btn-link" [routerLink]="['/']" [queryParams]="{ page: 1, searchText: searchText}" class="btn btn-secondary">Back to Country List</a>
+        <a class="btn btn-link" [routerLink]="['/']" [queryParams]="{ page: 1, searchText: searchText}" >Back to Country List</a>
     </form>
 
     <span *ngIf="error" class="text-danger">{{error}}</span>

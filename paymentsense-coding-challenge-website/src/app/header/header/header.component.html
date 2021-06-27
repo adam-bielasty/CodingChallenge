@@ -8,9 +8,14 @@
                     <fa-icon [icon]="faSearch"></fa-icon>
                 </button>
             </div>
-            <input class="form-control mr-sm-2" name="searchText" type="search" placeholder="Search" aria-label="Search"
+            <input class="form-control" name="searchText" type="search" placeholder="Search" aria-label="Search"
                 aria-describedby="search-icon-addon" [(ngModel)]="searchText">
 
+            <div class="input-group-append">
+                <button class="input-group-text btn btn-primary" id="search-icon-addon" (click)="clearFilter()">
+                    <fa-icon [icon]="faTimesCircle"></fa-icon>
+                </button>
+            </div>
 
             <a routerLink="/country/add" class="btn btn-secondary">Add</a>
         </div>
