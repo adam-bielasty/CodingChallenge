@@ -39,7 +39,7 @@ namespace Paymentsense.Coding.Challenge.Api
                 client.BaseAddress = new Uri("https://restcountries.eu/rest/v2/");
             });
 
-            services.AddTransient<ICountryService, CountryService>();
+            services.AddSingleton<ICountryService, CountryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

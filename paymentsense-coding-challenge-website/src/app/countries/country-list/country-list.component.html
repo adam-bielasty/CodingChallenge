@@ -1,12 +1,19 @@
-<div *ngIf="countries && countries.length > 0">
-    <app-paginator [metaData]="metaData" (changePage)="changePage($event)"></app-paginator>
+<div class="main">
 
-    <div class="country-list">
-        <app-country *ngFor="let country of countries" [country]="country"></app-country>
+    <div *ngIf="countries && countries.length > 0">
+
+        <div class="result-info">Found {{metaData.totalItemCount}} results.</div>
+    
+        <app-paginator [metaData]="metaData" (changePage)="changePage($event)"></app-paginator>
+    
+        <div class="country-list">
+            <app-country *ngFor="let country of countries" [country]="country"></app-country>
+        </div>
+    
+        <app-paginator [metaData]="metaData" (changePage)="changePage($event)"></app-paginator>
     </div>
 
-    <app-paginator [metaData]="metaData" (changePage)="changePage($event)"></app-paginator>
-</div>
-<div *ngIf="!countries || countries.length == 0">
-    <p>There is no results.</p>
+    <div *ngIf="!countries || countries.length == 0">
+        <p>No results found.</p>
+    </div>
 </div>

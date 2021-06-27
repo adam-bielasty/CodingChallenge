@@ -1,7 +1,14 @@
 @import "../../../scss/variables.scss";
 
-.country-list {
-    margin-bottom: 16px;
+.main {
+    max-width: 400px;
+    margin: 0 auto;
+    padding-bottom: 16px;
+}
+
+.result-info {
+    text-align: left;
+    padding: 12px 0;
 }
 
 app-country {
@@ -10,6 +17,10 @@ app-country {
 
 @media (max-width: $xs-size) { 
     .country-list {
+        padding: 10px;
+    }
+
+    .result-info {
         padding: 10px;
     }
 }

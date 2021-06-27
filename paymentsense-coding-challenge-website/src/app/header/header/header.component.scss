@@ -4,7 +4,15 @@ nav {
     justify-content: center;
 
     background-color: cornflowerblue !important;
+    
     img {
         height: 60px;
+    }
+
+    .api-info {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        font-size: 12px;
     }
 }

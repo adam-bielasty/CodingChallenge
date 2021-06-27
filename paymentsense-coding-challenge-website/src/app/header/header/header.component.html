@@ -1,14 +1,25 @@
 <nav class="navbar sticky-top navbar-light bg-light">
     <img width="50%" alt="Paymentsense Logo" src="../assets/paymentsense-logo.svg">
 
-    <form class="form-inline">
+    <form class="form-inline" (ngSubmit)="onSubmit()" #searchForm="ngForm">
         <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="search-icon-addon">
-                    <fa-icon [icon]="faSearch"></fa-icon> 
-                </span>
+                <button class="input-group-text btn btn-primary" id="search-icon-addon">
+                    <fa-icon [icon]="faSearch"></fa-icon>
+                </button>
             </div>
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" aria-describedby="search-icon-addon">
+            <input class="form-control mr-sm-2" name="searchText" type="search" placeholder="Search" aria-label="Search"
+                aria-describedby="search-icon-addon" [(ngModel)]="searchText">
+
+
+            <a routerLink="/country/add" class="btn btn-secondary">Add</a>
         </div>
     </form>
+
+
+    <span class="api-info">API is
+        <fa-icon [icon]=paymentsenseCodingChallengeApiActiveIcon
+            [styles]="{ 'stroke': paymentsenseCodingChallengeApiActiveIconColour, 'color': paymentsenseCodingChallengeApiActiveIconColour }">
+        </fa-icon>
+    </span>
 </nav>

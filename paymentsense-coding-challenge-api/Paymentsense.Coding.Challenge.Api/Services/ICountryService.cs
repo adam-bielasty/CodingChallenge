@@ -8,8 +8,8 @@ namespace Paymentsense.Coding.Challenge.Api.Services
 {
     public interface ICountryService
     {
-        Task<IEnumerable<Country>> GetAll();
-        Task<PagedListResponse<Country>> GetPaged(int page = 1, int pageSize = 10);
-        Task<Country> GetByCode(string code);
+        Task<IEnumerable<Country>> GetAll(string searchText = "");
+        Task<PagedListResponse<Country>> GetPaged(int page = 1, int pageSize = 10, string searchText = "");
+        Task Add(Country country);
     }
 }

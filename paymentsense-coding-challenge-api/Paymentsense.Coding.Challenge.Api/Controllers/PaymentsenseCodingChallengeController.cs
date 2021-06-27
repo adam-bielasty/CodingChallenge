@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Paymentsense.Coding.Challenge.Api.Models;
 using Paymentsense.Coding.Challenge.Api.Services;
 
 namespace Paymentsense.Coding.Challenge.Api.Controllers
@@ -24,21 +25,16 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
         }
 
         [HttpGet("countries/{page:int}")]
-        public async Task<IActionResult> GetCountries(int page = Consts.DefaultPageNumber)
+        public async Task<IActionResult> GetCountries(int page = Consts.DefaultPageNumber, string searchText = "")
         {   
-            return Ok(await _countryService.GetPaged(page));
+            return Ok(await _countryService.GetPaged(page, Consts.PageSize, searchText));
         }
         
-        [HttpGet("countries/{code}")]
-        public async Task<IActionResult> GetByCode(string code)
+        [HttpPost("countries")]
+        public async Task<IActionResult> AddCountry(Country country)
         {
-            var country = await _countryService.GetByCode(code);
-            if (country != null)
-            {
-                return Ok(country);
-            }
-
-            return BadRequest($"Cannot find the country by code: {code}");
+            await _countryService.Add(country);
+            return Ok();
         }
         
         [HttpGet]

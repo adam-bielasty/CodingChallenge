@@ -1,13 +1,2 @@
-<div style="text-align:center">
-
-  <app-header></app-header>
-  
-  <h5>... Paymentsense Coding Challenge API is 
-    <fa-icon [icon]=paymentsenseCodingChallengeApiActiveIcon
-    [styles]="{ 'stroke': paymentsenseCodingChallengeApiActiveIconColour, 'color': paymentsenseCodingChallengeApiActiveIconColour }"></fa-icon> ...
-  </h5>
-
-  <app-country-list [page]="1"></app-country-list>                                                 
-</div>
-
+<app-header (search)="search($event)"></app-header>
 <router-outlet></router-outlet>

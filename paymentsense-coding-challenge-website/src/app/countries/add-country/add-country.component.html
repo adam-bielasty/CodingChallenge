@@ -1,0 +1,15 @@
+<div class="add-country container">
+    <h3>Add New Country: </h3>
+
+    <form class="form-inline" (ngSubmit)="onSubmit()" #addCountryForm="ngForm">
+        <div class="input-group">
+            <input class="form-control mr-sm-2" name="name" type="text" placeholder="Name" [(ngModel)]="name">
+        </div>
+        <button class="btn btn-primary">Add Country</button>
+        
+        
+        <a class="btn btn-link" [routerLink]="['/']" [queryParams]="{ page: 1, searchText: searchText}" class="btn btn-secondary">Back to Country List</a>
+    </form>
+
+    <span *ngIf="error" class="text-danger">{{error}}</span>
+</div>

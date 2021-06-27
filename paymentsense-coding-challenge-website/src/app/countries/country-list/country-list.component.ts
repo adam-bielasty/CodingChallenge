@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Country } from 'src/app/models/country';
 import { CountryService } from 'src/app/services';
 import { MetaData } from 'src/app/models/MetaData';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-country-list',
@@ -10,23 +11,33 @@ import { MetaData } from 'src/app/models/MetaData';
 })
 export class CountryListComponent implements OnInit {
 
-  @Input() page: number = 1;
-
+  page: number = 1;
+  searchText: string = "";
   countries: Country[];
   metaData: MetaData;
 
-  constructor(private countryService: CountryService) { }
+  constructor(
+    private countryService: CountryService,
+    private route: ActivatedRoute,
+    private router: Router
+    ) { }
 
   async ngOnInit() {
-    await this.refreshPage(this.page);
+    this.route.queryParams
+    .subscribe(async params => {
+      this.page = +params['page'];
+      this.searchText = params['searchText'] || "";
+
+      await this.refreshPage(this.page, this.searchText);
+    });
   }
 
   async changePage(page: number) {
-    await this.refreshPage(page);
+    this.router.navigate( ['.'],  { queryParams: { page: page, searchText: this.searchText } })
   }
 
-  async refreshPage(page: number) {
-    let pagedResult = await this.countryService.getPagedCountries(page).toPromise();
+  async refreshPage(page: number, searchText: string) {
+    let pagedResult = await this.countryService.getPagedCountries(page, searchText).toPromise();
     this.countries = pagedResult.items;
     this.metaData = pagedResult.metaData;
   }

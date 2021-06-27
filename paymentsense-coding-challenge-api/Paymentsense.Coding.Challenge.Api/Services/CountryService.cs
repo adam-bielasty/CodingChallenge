@@ -15,6 +15,9 @@ namespace Paymentsense.Coding.Challenge.Api.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IMemoryCache _memoryCache;
+        // Related to Task 5), new countries can be added manually and stored in memory
+        private readonly IList<Country> _additionalCountries = new List<Country>();
+
 
         public CountryService(
             IHttpClientFactory httpClientFactory, 
@@ -24,34 +27,66 @@ namespace Paymentsense.Coding.Challenge.Api.Services
             _httpClient = httpClientFactory.CreateClient(Consts.HttpClientNames.RestCountry);
         }
 
-        public async Task<IEnumerable<Country>> GetAll()
+        public async Task<IEnumerable<Country>> GetAll(string searchText = "")
         {
-            return await _memoryCache.GetOrCreateAsync(Consts.CacheKeys.RestCountryAll, async entry =>
+            var countries = await _memoryCache.GetOrCreateAsync(Consts.CacheKeys.RestCountryAll, async entry =>
             {
                 // It's read from Constants but this is simplification for that test.
                 // It can be changed and read from AppSettings if necessary
-                entry.SlidingExpiration = TimeSpan.FromMinutes(Consts.DefaultCacheTimespanInSeconds);
-
-                var response = await _httpClient.GetAsync("/rest/v2/all?fields=name;flag;population;timezones;languages;currencies;capital;borders;alpha3Code");
-                var countries =  (await HandleResponse<IEnumerable<Country>>(response)).ToList();
-                countries.ForEach(c => c.CountryBorders = c.Borders.Select(b => countries.First(c => c.Alpha3Code.Equals(b, StringComparison.InvariantCultureIgnoreCase)).Name));
-                return countries;
+                entry.SlidingExpiration = TimeSpan.FromSeconds(Consts.DefaultCacheTimespanInSeconds);
+                
+                return await GetCountries();
             });
+            
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                return countries.Where(c => c.Name.Contains(searchText, StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            return countries;
         }
 
-        public async Task<PagedListResponse<Country>> GetPaged(int page = Consts.DefaultPageNumber, int pageSize = Consts.PageSize)
+        private async Task<List<Country>> GetCountries()
         {
-            var countries = await GetAll();
+            var response = await _httpClient.GetAsync(
+                "/rest/v2/all?fields=name;flag;population;timezones;languages;currencies;capital;borders;alpha3Code");
+            var restCountries = (await HandleResponse<IEnumerable<Country>>(response)).ToList();
+            
+            // Map border names
+            restCountries.ForEach(c => c.CountryBorders = c.Borders.Select(
+                b => restCountries.First(rc => rc.Alpha3Code.Equals(b, StringComparison.InvariantCultureIgnoreCase)).Name));
+            
+            AppendAdditionalCountries(restCountries);
+            
+            return restCountries;
+        }
+
+        private void AppendAdditionalCountries(IList<Country> countries)
+        {
+            // Rest Countries take precedence
+            _additionalCountries.ToList().ForEach(ac => 
+            {
+                if (!countries.Select(x => x.Name).Contains(ac.Name))
+                {
+                    countries.Add(ac);
+                }
+            });
+        }
+        
+        public async Task<PagedListResponse<Country>> GetPaged(int page = Consts.DefaultPageNumber, int pageSize = Consts.PageSize, string searchText = "")
+        {
+            var countries = await GetAll(searchText);
             var pagedResults = await countries.ToPagedListAsync(page, pageSize);
             
             return new PagedListResponse<Country>(pagedResults);
         }
 
-        public async Task<Country> GetByCode(string code)
+        public async Task Add(Country country)
         {
-            return (await GetAll()).FirstOrDefault(x => x.Alpha3Code.Equals(code, StringComparison.InvariantCultureIgnoreCase));
+            _additionalCountries.Add(country);
+            _memoryCache.Set(Consts.CacheKeys.RestCountryAll, await GetCountries());
         }
-        
+
         private async Task<T> HandleResponse<T>(HttpResponseMessage response)
         {
             if (response.IsSuccessStatusCode)

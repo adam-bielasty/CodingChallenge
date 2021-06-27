@@ -11,6 +11,8 @@ import { CountryListComponent } from './countries/country-list/country-list.comp
 import { CountryComponent } from './countries/country/country.component';
 import { PaginatorComponent } from './common/paginator/paginator.component';
 import { HeaderComponent } from './header/header/header.component';
+import { FormsModule } from '@angular/forms';
+import { AddCountryComponent } from './countries/add-country/add-country.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,17 @@ import { HeaderComponent } from './header/header/header.component';
     CountryListComponent,
     CountryComponent,
     PaginatorComponent,
-    HeaderComponent
+    HeaderComponent,
+    AddCountryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [PaymentsenseCodingChallengeApiService],
   bootstrap: [AppComponent]
