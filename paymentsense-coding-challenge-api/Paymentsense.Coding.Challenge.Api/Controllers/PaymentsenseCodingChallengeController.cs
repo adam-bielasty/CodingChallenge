@@ -15,14 +15,6 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
         {
             _countryService = countryService;
         }
-        
-        [HttpGet("countries")]
-        public async Task<IActionResult> GetAllCountries()
-        {
-            // If there is an exception, I would catch it in Global Exception filter, log the error (e.g. AppInsights)
-            // and return some error correlation id to the user.
-            return Ok(await _countryService.GetAll());
-        }
 
         [HttpGet("countries/{page:int}")]
         public async Task<IActionResult> GetCountries(int page = Consts.DefaultPageNumber, string searchText = "")
@@ -38,7 +30,7 @@ namespace Paymentsense.Coding.Challenge.Api.Controllers
         }
         
         [HttpGet]
-        public ActionResult<string> Get()
+        public async Task<IActionResult> Get()
         {
             return Ok("Paymentsense Coding Challenge!");
         }

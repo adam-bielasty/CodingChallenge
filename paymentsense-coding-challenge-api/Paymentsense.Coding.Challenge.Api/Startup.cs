@@ -36,7 +36,7 @@ namespace Paymentsense.Coding.Challenge.Api
 
             services.AddHttpClient(Consts.HttpClientNames.RestCountry, client =>
             {
-                client.BaseAddress = new Uri("https://restcountries.eu/rest/v2/");
+                client.BaseAddress = new Uri("https://restcountries.eu");
             });
 
             services.AddSingleton<ICountryService, CountryService>();

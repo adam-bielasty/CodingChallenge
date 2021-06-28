@@ -31,7 +31,7 @@ namespace Paymentsense.Coding.Challenge.Api.Services
         {
             var countries = await _memoryCache.GetOrCreateAsync(Consts.CacheKeys.RestCountryAll, async entry =>
             {
-                // It's read from Constants but this is simplification for that test.
+                // It's read from Constants but this is simplification for that interview test.
                 // It can be changed and read from AppSettings if necessary
                 entry.SlidingExpiration = TimeSpan.FromSeconds(Consts.DefaultCacheTimespanInSeconds);
                 
