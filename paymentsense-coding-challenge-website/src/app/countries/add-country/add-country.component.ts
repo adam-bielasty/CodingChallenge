@@ -18,6 +18,8 @@ export class AddCountryComponent implements OnInit {
 
   onSubmit() {
     
+    // Just adding by name. Test simplification. Normally, I would create a proper full form to add country with all necessary attributes
+
     this.countryService
         .add(this.name)
         .subscribe(
