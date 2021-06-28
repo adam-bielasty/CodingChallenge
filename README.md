@@ -17,5 +17,16 @@ search for a country from the api
 
 - Task 5) Add the ability to add a new country stored in memory but still displayed on the UI
 
+# Screenshots:
+
+### Desktop:
+![image](https://user-images.githubusercontent.com/13468002/123631467-b0a9ec80-d80e-11eb-9f38-fc86628ea7e2.png)
+
+### Mobile:
+![image](https://user-images.githubusercontent.com/13468002/123631534-c3242600-d80e-11eb-868b-1f5db3b490fc.png)
+
+# Comment
+I have spend around 3 days of coding to complete this task. There are still some small UI problems and little issues. However, I think it's just good enough to leave it as it is for that interview task.
+
 ## Setup
 * Please download latest dotnet core (3+) -> https://dotnet.microsoft.com/download/dotnet-core
